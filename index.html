@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Clock</title>
+    <link rel="icon" href="watch.ico" />
+  </head>
+  <body>
+    <h3 id="display"></h3>
+    <div class="clock">
+      <div id="center-cover"></div>
+      
+      <div class="clock-face">
+        <div class="number" id="number-12">XII</div>
+        <div class="number" id="number-1">I</div>
+        <div class="number" id="number-2">II</div>
+        <div class="number" id="number-3">III</div>
+        <div class="number" id="number-4">IV</div>
+        <div class="number" id="number-5">V</div>
+        <div class="number" id="number-6">VI</div>
+        <div class="number" id="number-7">VII</div>
+        <div class="number" id="number-8">VIII</div>
+        <div class="number" id="number-9">IX</div>
+        <div class="number" id="number-10">X</div>
+        <div class="number" id="number-11">XI</div>
+        <div class="hand hour-hand" id="hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+      </div>
+    </div>
+<button class="btn" type="button" onclick="displayDate()">Display Date</button>
+    <style>
+      
+.btn {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #c334d9;
+  background-image: -webkit-linear-gradient(top, #c334d9, #2980b9);
+  background-image: -moz-linear-gradient(top, #c334d9, #2980b9);
+  background-image: -ms-linear-gradient(top, #c334d9, #2980b9);
+  background-image: -o-linear-gradient(top, #c334d9, #2980b9);
+  background-image: linear-gradient(to bottom, #c334d9, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 21px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  text-align: center;
+}
+      html {
+        background: #018ded url(https://unsplash.it/1500/1000?image=881&blur=5);
+        background-size: cover;
+        font-family: "helvetica neue";
+        text-align: center;
+        font-size: 10px;
+      }
+      #number-12 {
+        position: absolute;
+        z-index: 10;
+        top: 0px;
+        right: 0;
+        left: 0;
+      }
+      #number-1 {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        left: 18rem;
+      }
+      #number-2 {
+        position: absolute;
+        top: 7rem;
+        right: 2rem;
+        left: 27rem;
+      }
+      #number-3 {
+        position: absolute;
+        top: 14rem;
+        right: 2rem;
+        left: 29rem;
+      }
+      #number-4 {
+        position: absolute;
+        top: 21rem;
+        right: 2rem;
+        left: 27rem;
+      }
+      #number-5 {
+        position: absolute;
+        top: 27rem;
+        right: 2rem;
+        left: 18rem;
+      }
+      #number-6 {
+        position: absolute;
+        top: 29rem;
+        right: 0rem;
+        left: 0rem;
+      }
+      #number-7 {
+        position: absolute;
+        top: 27rem;
+        right: 18rem;
+        left: 2rem;
+      }
+      #number-8 {
+        position: absolute;
+        top: 21rem;
+        right: 27rem;
+        left: 2rem;
+      }
+      #number-9 {
+        position: absolute;
+        top: 14rem;
+        right: 29rem;
+        left: 0rem;
+      }
+      #number-10 {
+        position: absolute;
+        top: 7rem;
+        right: 27rem;
+        left: 2rem;
+      }
+      #number-11 {
+        position: absolute;
+        top: 2rem;
+        right: 18rem;
+        left: 2rem;
+      }
+      body {
+        margin: 0;
+        font-size: 2rem;
+        display: flex;
+        flex: 1;
+        min-height: 100vh;
+        align-items: center;
+      }
+
+      .clock {
+        width: 30rem;
+        height: 30rem;
+        border: 20px solid white;
+        border-radius: 50%;
+        margin: 50px auto;
+        position: relative;
+        padding: 2rem;
+        box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1), inset 0 0 0 3px #efefef,
+          inset 0 0 10px black, 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      #center-cover {
+        background: coral;
+        position: absolute;
+        z-index: 10;
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        margin: auto;
+      }
+
+      .clock-face {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform: translateY(
+          -3px
+        ); /* account for the height of the clock hands */
+      }
+
+      .hand {
+        width: 50%;
+        height: 6px;
+        background: rosybrown;
+        position: absolute;
+        top: 50%;
+        transform-origin: 100%;
+        transform: rotate(90deg);
+        transition: all 0.05s;
+        transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+      }
+      .btn:hover {
+  background: #fcec3c;
+  background-image: -webkit-linear-gradient(top, #fcec3c, #3498db);
+  background-image: -moz-linear-gradient(top, #fcec3c, #3498db);
+  background-image: -ms-linear-gradient(top, #fcec3c, #3498db);
+  background-image: -o-linear-gradient(top, #fcec3c, #3498db);
+  background-image: linear-gradient(to bottom, #fcec3c, #3498db);
+  text-decoration: none;
+}
+      
+    </style>
+
+    <script>
+      const secondHand = document.querySelector(".second-hand");
+      const minHand = document.querySelector(".min-hand");
+      const hourHand = document.querySelector(".hour-hand");
+      function setDate() {
+        const now = new Date();
+        const seconds = now.getSeconds();
+        const secondsDegrees = (seconds / 60) * 360 + 90;
+        secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+        const minutes = now.getMinutes();
+        const minutesDegrees = (minutes / 60) * 360 + 90;
+        minHand.style.transform = `rotate(${minutesDegrees}deg)`;
+        const hours = now.getHours();
+        const hoursDegrees = (hours / 12) * 360 + 90;
+        hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+      }
+      setInterval(setDate, 1000);
+      function displayDate() {
+        document.getElementById("display").innerHTML = Date();
+      }
+      setInterval(displayDate, 1000);
+    </script>
+  </body>
+  
+</html>
